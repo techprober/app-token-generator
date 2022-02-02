@@ -56,7 +56,7 @@ docker run --rm -it \
            --name app-token-generator \
            -e ${PWD}/private_key.pem:/function/private_key.pem \
            -e APP_ID=<YOUR GITHUB_APP_ID>
-           app-token-generator:latest
+           quay.io/techprober/app-token-generator:latest
 ```
 
 ## References
