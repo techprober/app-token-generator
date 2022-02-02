@@ -58,7 +58,6 @@ TARGETS
 	help            Show the help menu
 	build           Build the application image
 	run             Run the application container locally (VERSION optional)
-	set-webhook     Update the bound webhook url
 	publish         Build the application image, tag it with a custom version tag, and push it to GHCR (Version required)
 
 EXAMPLE USAGE
