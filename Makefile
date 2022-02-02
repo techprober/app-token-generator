@@ -41,6 +41,7 @@ run:
 	@sudo nerdctl run --rm -it \
 				--name $(IMAGE_NAME) \
 				-e APP_ID=$(APP_ID) \
+				-e GITHUB_APP_KEY=$(PWD)/private-key.pem \
 				-v $(PWD)/private-key.pem:/function/private-key.pem \
 				$(IMAGE_NAME):$(IMAGE_TAG)
 
