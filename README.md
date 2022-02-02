@@ -38,7 +38,7 @@ Put `private-key.pem` under the project root path
 #### Run
 
 ```bash
-APP_ID=<YOUR GITHUB_APP_ID>./handler
+APP_ID=<YOUR GITHUB_APP_ID> ./handler.rb
 ```
 
 ## Containerization
