@@ -27,7 +27,7 @@ Using default settings with GitHub Apps may put you at risk of leaking data betw
 
 #### Application
 
-`App Token Generator` is a serverless function offers the end-user a way to generate a Github Access Token tailored to be used in any back-end system. It can also be intergrated in the standard CICD Pipeline as a seperate step or stage.
+`App Token Generator` is a serverless function offers the end-user a way to dynamically generate a Github Access Token tailored to be used in any back-end system. It can also be intergrated in the standard CICD Pipeline as a seperate step or stage.
 
 ## Local Setup
 
