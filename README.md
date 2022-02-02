@@ -33,7 +33,7 @@ Using default settings with GitHub Apps may put you at risk of leaking data betw
 
 #### Pre-requisite
 
-Put `private-key.pem` under the project root path
+- Put `private-key.pem` under the project root path
 
 #### Run
 
