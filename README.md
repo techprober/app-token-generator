@@ -38,7 +38,7 @@ Using default settings with GitHub Apps may put you at risk of leaking data betw
 #### Run
 
 ```bash
-APP_ID=<YOUR GITHUB_APP_ID> ./handler.rb
+GITHUB_APP_KEY=private-key.pem APP_ID=<YOUR GITHUB_APP_ID> ./handler.rb
 ```
 
 ## Containerization
@@ -55,12 +55,13 @@ Run the application as a container
 docker run --rm -it \
            --name app-token-generator \
            -e APP_ID=<YOUR GITHUB_APP_ID> \
-           -e GITHUB_APP_KEY=/opt/certs/private-key.pem \
-           -e EXPIRATION=<EXPIRE AFTER 10 mins BY DEFAULT> \
-           -v $(PWD)/private-key.pem:/opt/certs/private-key.pem \
+           -e GITHUB_APP_KEY=<KEY LOCATION> \
+           -v $(PWD)/private-key.pem:<KEY_LOCATION> \
            quay.io/techprober/app-token-generator:latest
 ```
 
 ## References
 
 - [GitHub Apps - How to avoid leaking your customer’s source code with GitHub apps](https://roadie.io/blog/avoid-leaking-github-org-data/)
+- [GitHub Docs - Authenticating with github apps](https://docs.github.com/en/developers/apps/building-github-apps/authenticating-with-github-apps#generating-a-private-key)
+- [GitHub API Docs - Create an installation access token for an app](https://docs.github.com/en/rest/reference/apps#create-an-installation-access-token-for-an-app)
