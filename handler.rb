@@ -6,18 +6,15 @@ require 'jwt'
 
 def getJWT()
   # Private key contents
-  private_pem = File.read(ENV["GITHUB_APP_KEY"])
-  private_key = OpenSSL::PKey::RSA.new(private_pem)
-
-  # Set token expiration
-  expire_after = (ENV["EXPIRATION"] ? ENV["EXPIRATION"] : "10").to_i
+  pem_location = ENV["GITHUB_APP_KEY"] ? ENV["GITHUB_APP_KEY"] : "/opt/certs/private-key.pem"
+  private_key = OpenSSL::PKey::RSA.new(File.read(pem_location))
 
   # Generate the JWT
   payload = {
     # issued at time, 60 seconds in the past to allow for clock drift
     iat: Time.now.to_i - 60,
-    # JWT expiration time (10 minute maximum by default)
-    exp: Time.now.to_i + (expire_after * 60),
+    # JWT expiration time (10 minute maximum)
+    exp: Time.now.to_i + (10 * 60),
     # GitHub App's identifier
     iss: ENV["APP_ID"]
   }
@@ -25,11 +22,13 @@ def getJWT()
   return JWT.encode(payload, private_key, "RS256")
 end
 
+jwt_token = getJWT()
+
 $baseURL = 'https://api.github.com/app/installations'
-$headers = { Authorization: "Bearer #{getJWT()}" }
+$headers = { Authorization: "Bearer #{jwt_token}" }
 
 # Get installation_id
-def getInstallationID(jwt)
+def getInstallationID()
   response = HTTParty.get($baseURL, headers: $headers)
   id = JSON.parse(response.body)[0]["id"] if response.code == 200
   return id
@@ -43,6 +42,6 @@ def generateToken(id)
   STDOUT.flush
 end
 
-id = getInstallationID(getJWT())
+id = getInstallationID()
 generateToken(id)
 
