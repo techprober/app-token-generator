@@ -36,7 +36,8 @@ end
 def generateToken(id)
   response = HTTParty.post("#{$baseURL}/#{id}/access_tokens", headers: $headers)
   result = JSON.parse(response.body)
-  puts result["token"]
+  print result["token"]
+  STDOUT.flush
 end
 
 id = getInstallationID(getJWT())
