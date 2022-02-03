@@ -54,9 +54,10 @@ Run the application as a container
 ```bash
 docker run --rm -it \
            --name app-token-generator \
-           -e GITHUB_APP_KEY=/opt/certs/private-key.pem \
-           -v $(PWD)/private-key.pem:/opt/certs/private-key.pem \
            -e APP_ID=<YOUR GITHUB_APP_ID> \
+           -e GITHUB_APP_KEY=/opt/certs/private-key.pem \
+           -e EXPIRATION=<EXPIRE AFTER 10 mins BY DEFAULT> \
+           -v $(PWD)/private-key.pem:/opt/certs/private-key.pem \
            quay.io/techprober/app-token-generator:latest
 ```
 
