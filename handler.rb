@@ -9,12 +9,15 @@ def getJWT()
   private_pem = File.read(ENV["GITHUB_APP_KEY"])
   private_key = OpenSSL::PKey::RSA.new(private_pem)
 
+  # Set token expiration
+  expire_after = (ENV["EXPIRATION"] ? ENV["EXPIRATION"] : "10").to_i
+
   # Generate the JWT
   payload = {
     # issued at time, 60 seconds in the past to allow for clock drift
     iat: Time.now.to_i - 60,
-    # JWT expiration time (10 minute maximum)
-    exp: Time.now.to_i + (10 * 60),
+    # JWT expiration time (10 minute maximum by default)
+    exp: Time.now.to_i + (expire_after * 60),
     # GitHub App's identifier
     iss: ENV["APP_ID"]
   }
